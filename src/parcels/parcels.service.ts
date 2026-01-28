@@ -29,18 +29,14 @@ export class ParcelsService {
     }
 
     /**
-     * Calculate shipping fees based on weight
-     * This is a simple calculation - can be customized
+     * Calculate shipping fee based on weight and declared value
+     * Formula: (weight in lbs * $3) + (declared value * 2%)
      */
     private calculateShippingFee(weight: number, declaredValue: number): number {
-        // Base rate: $5 per kg
-        const baseRate = 5;
-        const weightFee = weight * baseRate;
-
-        // Add 2% of declared value as insurance
-        const insuranceFee = declaredValue * 0.02;
-
-        return Math.round((weightFee + insuranceFee) * 100) / 100;
+        const weightFee = weight * 3; // $3 per pound
+        const valueFee = declaredValue * 0.02; // 2% of declared value
+        const shippingFee = weightFee + valueFee;
+        return Math.round(shippingFee * 100) / 100; // Round to 2 decimals
     }
 
     /**

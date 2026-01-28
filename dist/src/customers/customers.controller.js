@@ -27,11 +27,17 @@ let CustomersController = class CustomersController {
     findAll(search) {
         return this.customersService.findAll(search);
     }
-    findOne(id) {
-        return this.customersService.findOne(id);
+    searchByCode(code) {
+        return this.customersService.searchByCode(code);
     }
     findByCustomAddress(customAddress) {
         return this.customersService.findByCustomAddress(customAddress);
+    }
+    getUSAAddress(id) {
+        return this.customersService.getUSAAddress(id);
+    }
+    findOne(id) {
+        return this.customersService.findOne(id);
     }
 };
 exports.CustomersController = CustomersController;
@@ -50,12 +56,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CustomersController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)('search/by-code'),
+    __param(0, (0, common_1.Query)('code')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], CustomersController.prototype, "findOne", null);
+], CustomersController.prototype, "searchByCode", null);
 __decorate([
     (0, common_1.Get)('address/:customAddress'),
     __param(0, (0, common_1.Param)('customAddress')),
@@ -63,6 +69,20 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CustomersController.prototype, "findByCustomAddress", null);
+__decorate([
+    (0, common_1.Get)(':id/usa-address'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CustomersController.prototype, "getUSAAddress", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CustomersController.prototype, "findOne", null);
 exports.CustomersController = CustomersController = __decorate([
     (0, common_1.Controller)('customers'),
     __metadata("design:paramtypes", [customers_service_1.CustomersService])

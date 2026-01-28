@@ -8,48 +8,83 @@ export declare class CustomersController {
         email: string;
         firstName: string;
         lastName: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        customAddress: string;
         phone: string;
+        customAddress: string;
+        fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;
         country: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findAll(search?: string): Promise<{
         id: string;
         email: string;
         firstName: string;
         lastName: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        customAddress: string;
         phone: string;
+        customAddress: string;
+        fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;
         country: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         _count: {
             parcels: number;
         };
     }[]>;
+    searchByCode(code: string): Promise<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        phone: string;
+        customAddress: string;
+        fullUSAAddress: string | null;
+        addressLine1: string | null;
+        city: string | null;
+        country: string;
+    }[]>;
+    findByCustomAddress(customAddress: string): Promise<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        phone: string;
+        customAddress: string;
+        addressLine1: string | null;
+        addressLine2: string | null;
+        city: string | null;
+        country: string;
+        isActive: boolean;
+        createdAt: Date;
+    }>;
+    getUSAAddress(id: string): Promise<{
+        customerId: string;
+        customerName: string;
+        customAddress: string;
+        fullAddress: string | null;
+        formattedAddress: string[];
+    }>;
     findOne(id: string): Promise<{
         id: string;
         email: string;
         firstName: string;
         lastName: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        customAddress: string;
         phone: string;
+        customAddress: string;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;
         country: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         parcels: {
             id: string;
             createdAt: Date;
@@ -79,19 +114,5 @@ export declare class CustomersController {
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             notes: string | null;
         }[];
-    }>;
-    findByCustomAddress(customAddress: string): Promise<{
-        id: string;
-        email: string;
-        firstName: string;
-        lastName: string;
-        isActive: boolean;
-        createdAt: Date;
-        customAddress: string;
-        phone: string;
-        addressLine1: string | null;
-        addressLine2: string | null;
-        city: string | null;
-        country: string;
     }>;
 }

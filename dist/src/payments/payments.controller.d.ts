@@ -67,15 +67,16 @@ export declare class PaymentsController {
                 password: string | null;
                 firstName: string;
                 lastName: string;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date;
-                customAddress: string;
                 phone: string;
+                customAddress: string;
+                fullUSAAddress: string | null;
                 addressLine1: string | null;
                 addressLine2: string | null;
                 city: string | null;
                 country: string;
+                isActive: boolean;
+                createdAt: Date;
+                updatedAt: Date;
             };
         } & {
             id: string;

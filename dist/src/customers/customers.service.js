@@ -48,13 +48,19 @@ const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = __importStar(require("bcrypt"));
 let CustomersService = class CustomersService {
     prisma;
+    WAREHOUSE_ADDRESS = {
+        street: '7829 NW 72nd Ave',
+        city: 'Miami',
+        state: 'FL',
+        zipCode: '33166',
+    };
     constructor(prisma) {
         this.prisma = prisma;
     }
     async generateCustomAddress(firstName, lastName) {
-        const firstLetter = lastName.charAt(0).toUpperCase();
-        const randomNumber = Math.floor(1000 + Math.random() * 9000);
-        let customAddress = `YENGSHIPPING${firstLetter}-${firstName}-${randomNumber}`;
+        const firstLetterLastName = lastName.charAt(0).toUpperCase();
+        const uniqueCode = Math.floor(1000 + Math.random() * 9000);
+        let customAddress = `YENGSHIPPING ${firstLetterLastName}${firstName}/${uniqueCode}`;
         const existing = await this.prisma.customer.findUnique({
             where: { customAddress },
         });
@@ -62,6 +68,9 @@ let CustomersService = class CustomersService {
             return this.generateCustomAddress(firstName, lastName);
         }
         return customAddress;
+    }
+    generateFullUSAAddress(customAddress) {
+        return `${customAddress}\n${this.WAREHOUSE_ADDRESS.street}\n${this.WAREHOUSE_ADDRESS.city}, ${this.WAREHOUSE_ADDRESS.state} ${this.WAREHOUSE_ADDRESS.zipCode}`;
     }
     async create(createCustomerDto) {
         const existingCustomer = await this.prisma.customer.findUnique({
@@ -71,6 +80,7 @@ let CustomersService = class CustomersService {
             throw new common_1.ConflictException('Un client avec cet email existe déjà');
         }
         const customAddress = await this.generateCustomAddress(createCustomerDto.firstName, createCustomerDto.lastName);
+        const fullUSAAddress = this.generateFullUSAAddress(customAddress);
         let hashedPassword;
         if (createCustomerDto.password) {
             hashedPassword = await bcrypt.hash(createCustomerDto.password, 10);
@@ -82,6 +92,7 @@ let CustomersService = class CustomersService {
                 lastName: createCustomerDto.lastName,
                 phone: createCustomerDto.phone,
                 customAddress,
+                fullUSAAddress,
                 password: hashedPassword,
                 addressLine1: createCustomerDto.addressLine1,
                 addressLine2: createCustomerDto.addressLine2,
@@ -111,6 +122,7 @@ let CustomersService = class CustomersService {
                 lastName: true,
                 phone: true,
                 customAddress: true,
+                fullUSAAddress: true,
                 addressLine1: true,
                 addressLine2: true,
                 city: true,
@@ -181,6 +193,52 @@ let CustomersService = class CustomersService {
             throw new common_1.NotFoundException('Client non trouvé');
         }
         return customer;
+    }
+    async getUSAAddress(id) {
+        const customer = await this.prisma.customer.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                customAddress: true,
+                fullUSAAddress: true,
+            },
+        });
+        if (!customer) {
+            throw new common_1.NotFoundException('Client non trouvé');
+        }
+        return {
+            customerId: customer.id,
+            customerName: `${customer.firstName} ${customer.lastName}`,
+            customAddress: customer.customAddress,
+            fullAddress: customer.fullUSAAddress,
+            formattedAddress: customer.fullUSAAddress?.split('\n') || [],
+        };
+    }
+    async searchByCode(searchTerm) {
+        const customers = await this.prisma.customer.findMany({
+            where: {
+                OR: [
+                    { customAddress: { contains: searchTerm, mode: 'insensitive' } },
+                    { customAddress: { endsWith: `/${searchTerm}` } },
+                ],
+            },
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                phone: true,
+                customAddress: true,
+                fullUSAAddress: true,
+                addressLine1: true,
+                city: true,
+                country: true,
+            },
+            take: 10,
+        });
+        return customers;
     }
 };
 exports.CustomersService = CustomersService;
