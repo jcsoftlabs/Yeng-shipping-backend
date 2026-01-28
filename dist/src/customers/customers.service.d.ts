@@ -48,6 +48,7 @@ export declare class CustomersService {
         lastName: string;
         phone: string;
         customAddress: string;
+        fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;

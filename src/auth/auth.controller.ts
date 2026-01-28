@@ -10,4 +10,9 @@ export class AuthController {
     login(@Body() loginDto: LoginDto) {
         return this.authService.login(loginDto);
     }
+
+    @Post('customer-login')
+    customerLogin(@Body() loginDto: LoginDto) {
+        return this.authService.login(loginDto);
+    }
 }

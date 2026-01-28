@@ -141,6 +141,7 @@ export class CustomersService {
                 lastName: true,
                 phone: true,
                 customAddress: true,
+                fullUSAAddress: true,
                 addressLine1: true,
                 addressLine2: true,
                 city: true,

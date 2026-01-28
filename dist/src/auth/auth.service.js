@@ -109,6 +109,7 @@ let AuthService = class AuthService {
                     lastName: customer.lastName,
                     role: 'CUSTOMER',
                     customAddress: customer.customAddress,
+                    fullUSAAddress: customer.fullUSAAddress,
                 },
             };
         }

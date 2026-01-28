@@ -16,16 +16,33 @@ exports.CustomersController = void 0;
 const common_1 = require("@nestjs/common");
 const customers_service_1 = require("./customers.service");
 const create_customer_dto_1 = require("./dto/create-customer.dto");
+const auth_service_1 = require("../auth/auth.service");
 let CustomersController = class CustomersController {
     customersService;
-    constructor(customersService) {
+    authService;
+    constructor(customersService, authService) {
         this.customersService = customersService;
+        this.authService = authService;
     }
     create(createCustomerDto) {
         return this.customersService.create(createCustomerDto);
     }
     findAll(search) {
         return this.customersService.findAll(search);
+    }
+    async getProfile(req) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            throw new common_1.UnauthorizedException('Token manquant');
+        }
+        const token = authHeader.split(' ')[1];
+        try {
+            const payload = await this.authService.validateToken(token);
+            return this.customersService.findOne(payload.sub);
+        }
+        catch (error) {
+            throw new common_1.UnauthorizedException('Token invalide');
+        }
     }
     searchByCode(code) {
         return this.customersService.searchByCode(code);
@@ -56,6 +73,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CustomersController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)('me'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CustomersController.prototype, "getProfile", null);
+__decorate([
     (0, common_1.Get)('search/by-code'),
     __param(0, (0, common_1.Query)('code')),
     __metadata("design:type", Function),
@@ -85,6 +109,8 @@ __decorate([
 ], CustomersController.prototype, "findOne", null);
 exports.CustomersController = CustomersController = __decorate([
     (0, common_1.Controller)('customers'),
-    __metadata("design:paramtypes", [customers_service_1.CustomersService])
+    __param(1, (0, common_1.Inject)((0, common_1.forwardRef)(() => auth_service_1.AuthService))),
+    __metadata("design:paramtypes", [customers_service_1.CustomersService,
+        auth_service_1.AuthService])
 ], CustomersController);
 //# sourceMappingURL=customers.controller.js.map

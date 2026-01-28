@@ -1,10 +1,12 @@
 import { ParcelsService } from './parcels.service';
+import { AuthService } from '../auth/auth.service';
 import { CreateParcelDto } from './dto/create-parcel.dto';
 import { UpdateParcelStatusDto } from './dto/update-parcel-status.dto';
 import { ParcelStatus } from '@prisma/client';
 export declare class ParcelsController {
     private readonly parcelsService;
-    constructor(parcelsService: ParcelsService);
+    private readonly authService;
+    constructor(parcelsService: ParcelsService, authService: AuthService);
     create(createParcelDto: CreateParcelDto): Promise<{
         customer: {
             id: string;
@@ -42,7 +44,7 @@ export declare class ParcelsController {
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         notes: string | null;
     }>;
-    findAll(status?: ParcelStatus, customerId?: string, search?: string): Promise<({
+    findAll(status?: ParcelStatus, customerId?: string, search?: string, req?: any): Promise<({
         customer: {
             id: string;
             email: string;

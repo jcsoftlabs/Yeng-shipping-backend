@@ -12,6 +12,7 @@ export declare class AuthController {
             lastName: string;
             role: import("@prisma/client").$Enums.UserRole;
             customAddress?: undefined;
+            fullUSAAddress?: undefined;
         };
     } | {
         access_token: string;
@@ -22,6 +23,30 @@ export declare class AuthController {
             lastName: string;
             role: string;
             customAddress: string;
+            fullUSAAddress: string | null;
+        };
+    }>;
+    customerLogin(loginDto: LoginDto): Promise<{
+        access_token: string;
+        user: {
+            id: string;
+            email: string;
+            firstName: string;
+            lastName: string;
+            role: import("@prisma/client").$Enums.UserRole;
+            customAddress?: undefined;
+            fullUSAAddress?: undefined;
+        };
+    } | {
+        access_token: string;
+        user: {
+            id: string;
+            email: string;
+            firstName: string;
+            lastName: string;
+            role: string;
+            customAddress: string;
+            fullUSAAddress: string | null;
         };
     }>;
 }

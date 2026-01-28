@@ -127,9 +127,12 @@ let InvoicesService = class InvoicesService {
             doc.on('data', buffers.push.bind(buffers));
             doc.on('end', () => resolve(Buffer.concat(buffers)));
             doc.on('error', reject);
-            doc.fontSize(20).text('YENG SHIPPING', { align: 'center' });
-            doc.fontSize(10).text('7829 NW 72nd Ave, Miami, FL 33166', { align: 'center' });
-            doc.moveDown();
+            const logoPath = require.resolve('../../assets/logo.png');
+            doc.image(logoPath, 50, 45, { width: 60 });
+            doc.fontSize(20).text('YENG SHIPPING', 120, 50);
+            doc.fontSize(10).text('7829 NW 72nd Ave, Miami, FL 33166', 120, 75);
+            doc.text('+509 3641 1990', 120, 90);
+            doc.moveDown(2);
             doc.fontSize(16).text('FACTURE', { align: 'center' });
             doc.moveDown();
             doc.fontSize(10);

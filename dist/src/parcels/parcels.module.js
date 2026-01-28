@@ -10,11 +10,13 @@ exports.ParcelsModule = void 0;
 const common_1 = require("@nestjs/common");
 const parcels_service_1 = require("./parcels.service");
 const parcels_controller_1 = require("./parcels.controller");
+const auth_module_1 = require("../auth/auth.module");
 let ParcelsModule = class ParcelsModule {
 };
 exports.ParcelsModule = ParcelsModule;
 exports.ParcelsModule = ParcelsModule = __decorate([
     (0, common_1.Module)({
+        imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [parcels_controller_1.ParcelsController],
         providers: [parcels_service_1.ParcelsService],
         exports: [parcels_service_1.ParcelsService],

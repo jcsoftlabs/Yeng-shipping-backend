@@ -1,8 +1,10 @@
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { AuthService } from '../auth/auth.service';
 export declare class CustomersController {
     private readonly customersService;
-    constructor(customersService: CustomersService);
+    private readonly authService;
+    constructor(customersService: CustomersService, authService: AuthService);
     create(createCustomerDto: CreateCustomerDto): Promise<{
         id: string;
         email: string;
@@ -38,6 +40,51 @@ export declare class CustomersController {
             parcels: number;
         };
     }[]>;
+    getProfile(req: any): Promise<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        phone: string;
+        customAddress: string;
+        fullUSAAddress: string | null;
+        addressLine1: string | null;
+        addressLine2: string | null;
+        city: string | null;
+        country: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        parcels: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            length: number | null;
+            trackingNumber: string;
+            barcode: string | null;
+            customerId: string;
+            senderName: string;
+            senderAddress: string;
+            senderCity: string;
+            senderState: string;
+            senderZipCode: string;
+            senderCountry: string;
+            description: string;
+            weight: number;
+            width: number | null;
+            height: number | null;
+            declaredValue: number;
+            status: import("@prisma/client").$Enums.ParcelStatus;
+            currentLocation: string | null;
+            estimatedArrival: Date | null;
+            shippingFee: number;
+            discount: number;
+            taxAmount: number;
+            totalAmount: number;
+            paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
+            notes: string | null;
+        }[];
+    }>;
     searchByCode(code: string): Promise<{
         id: string;
         email: string;
@@ -78,6 +125,7 @@ export declare class CustomersController {
         lastName: string;
         phone: string;
         customAddress: string;
+        fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;

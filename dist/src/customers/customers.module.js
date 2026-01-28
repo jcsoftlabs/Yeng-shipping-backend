@@ -10,11 +10,13 @@ exports.CustomersModule = void 0;
 const common_1 = require("@nestjs/common");
 const customers_service_1 = require("./customers.service");
 const customers_controller_1 = require("./customers.controller");
+const auth_module_1 = require("../auth/auth.module");
 let CustomersModule = class CustomersModule {
 };
 exports.CustomersModule = CustomersModule;
 exports.CustomersModule = CustomersModule = __decorate([
     (0, common_1.Module)({
+        imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [customers_controller_1.CustomersController],
         providers: [customers_service_1.CustomersService],
         exports: [customers_service_1.CustomersService],

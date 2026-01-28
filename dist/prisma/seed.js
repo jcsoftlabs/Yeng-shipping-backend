@@ -166,6 +166,35 @@ async function main() {
     console.log('✅ Created test payments:');
     console.log('   Payment 1: $' + payment1.amount + ' (' + payment1.method + ')');
     console.log('   Payment 2: $' + payment2.amount + ' (' + payment2.method + ')');
+    const invoice1 = await prisma.invoice.upsert({
+        where: { id: 'invoice-seed-1' },
+        update: {},
+        create: {
+            id: 'invoice-seed-1',
+            invoiceNumber: 'INV-2026-00001',
+            parcelId: parcel1.id,
+            subtotal: parcel1.shippingFee - parcel1.discount,
+            taxAmount: parcel1.taxAmount,
+            totalAmount: parcel1.totalAmount,
+            status: 'PAID',
+        },
+    });
+    const invoice2 = await prisma.invoice.upsert({
+        where: { id: 'invoice-seed-2' },
+        update: {},
+        create: {
+            id: 'invoice-seed-2',
+            invoiceNumber: 'INV-2026-00002',
+            parcelId: parcel2.id,
+            subtotal: parcel2.shippingFee - parcel2.discount,
+            taxAmount: parcel2.taxAmount,
+            totalAmount: parcel2.totalAmount,
+            status: 'PARTIAL',
+        },
+    });
+    console.log('✅ Created test invoices:');
+    console.log('   Invoice 1: ' + invoice1.invoiceNumber + ' (PAID)');
+    console.log('   Invoice 2: ' + invoice2.invoiceNumber + ' (PARTIAL)');
     console.log('\n📝 Login credentials:');
     console.log('   Admin: admin@yengshipping.com / admin123');
     console.log('   Customer: jean.pierre@example.com / customer123');

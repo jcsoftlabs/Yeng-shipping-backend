@@ -14,6 +14,7 @@ export declare class AuthService {
             lastName: string;
             role: import("@prisma/client").$Enums.UserRole;
             customAddress?: undefined;
+            fullUSAAddress?: undefined;
         };
     } | {
         access_token: string;
@@ -24,6 +25,7 @@ export declare class AuthService {
             lastName: string;
             role: string;
             customAddress: string;
+            fullUSAAddress: string | null;
         };
     }>;
     validateToken(token: string): Promise<any>;

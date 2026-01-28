@@ -15,19 +15,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParcelsController = void 0;
 const common_1 = require("@nestjs/common");
 const parcels_service_1 = require("./parcels.service");
+const auth_service_1 = require("../auth/auth.service");
 const create_parcel_dto_1 = require("./dto/create-parcel.dto");
 const update_parcel_status_dto_1 = require("./dto/update-parcel-status.dto");
 const client_1 = require("@prisma/client");
 let ParcelsController = class ParcelsController {
     parcelsService;
-    constructor(parcelsService) {
+    authService;
+    constructor(parcelsService, authService) {
         this.parcelsService = parcelsService;
+        this.authService = authService;
     }
     create(createParcelDto) {
         return this.parcelsService.create(createParcelDto);
     }
-    findAll(status, customerId, search) {
-        return this.parcelsService.findAll({ status, customerId, search });
+    async findAll(status, customerId, search, req) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            throw new common_1.UnauthorizedException('Authentification requise');
+        }
+        let finalCustomerId = customerId;
+        try {
+            const token = authHeader.split(' ')[1];
+            const payload = await this.authService.validateToken(token);
+            if (payload.role === 'CUSTOMER') {
+                finalCustomerId = payload.sub;
+            }
+        }
+        catch (error) {
+            throw new common_1.UnauthorizedException('Session invalide');
+        }
+        return this.parcelsService.findAll({ status, customerId: finalCustomerId, search });
     }
     findByTracking(trackingNumber) {
         return this.parcelsService.findByTracking(trackingNumber);
@@ -55,9 +73,10 @@ __decorate([
     __param(0, (0, common_1.Query)('status')),
     __param(1, (0, common_1.Query)('customerId')),
     __param(2, (0, common_1.Query)('search')),
+    __param(3, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [String, String, String, Object]),
+    __metadata("design:returntype", Promise)
 ], ParcelsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('tracking/:trackingNumber'),
@@ -90,6 +109,8 @@ __decorate([
 ], ParcelsController.prototype, "updateStatus", null);
 exports.ParcelsController = ParcelsController = __decorate([
     (0, common_1.Controller)('parcels'),
-    __metadata("design:paramtypes", [parcels_service_1.ParcelsService])
+    __param(1, (0, common_1.Inject)((0, common_1.forwardRef)(() => auth_service_1.AuthService))),
+    __metadata("design:paramtypes", [parcels_service_1.ParcelsService,
+        auth_service_1.AuthService])
 ], ParcelsController);
 //# sourceMappingURL=parcels.controller.js.map
