@@ -168,6 +168,9 @@ export class ParcelsService {
                 { trackingNumber: { contains: filters.search, mode: 'insensitive' } },
                 { barcode: { contains: filters.search, mode: 'insensitive' } },
                 { description: { contains: filters.search, mode: 'insensitive' } },
+                { customer: { customAddress: { contains: filters.search, mode: 'insensitive' } } },
+                { customer: { firstName: { contains: filters.search, mode: 'insensitive' } } },
+                { customer: { lastName: { contains: filters.search, mode: 'insensitive' } } },
             ];
         }
 
