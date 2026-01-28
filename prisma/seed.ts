@@ -44,8 +44,8 @@ async function main() {
             firstName: 'Jean',
             lastName: 'Pierre',
             phone: '+509 1234 5678',
-            customAddress: 'YENGSHIPPINGP-Jean-4582',
-            fullUSAAddress: 'YENGSHIPPINGP-Jean-4582\n7829 NW 72nd Ave\nMiami, FL 33166',
+            customAddress: 'YENGSHIPPING PJean/4582',
+            fullUSAAddress: 'YENGSHIPPING PJean/4582\n7829 NW 72nd Ave\nMiami, FL 33166',
             addressLine1: '123 Rue de la Paix',
             city: 'Port-au-Prince',
             country: 'Haiti',
@@ -54,6 +54,7 @@ async function main() {
 
     console.log('✅ Created test customer:', customer.email);
     console.log('   Custom address:', customer.customAddress);
+    console.log('   Full USA address:', customer.fullUSAAddress);
 
     // Create test parcels
     const parcel1 = await prisma.parcel.upsert({

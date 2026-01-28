@@ -17,14 +17,14 @@ export class CustomersService {
 
     /**
      * Generate custom shipping address
-     * Format: YENGSHIPPING + FirstLetter + FirstName + RandomNumber
-     * Example: YENGSHIPPINGJ-Pierre-4582
+     * Format: YENGSHIPPING + FirstLetterLastName + FirstName + / + UniqueCode
+     * Example: YENGSHIPPING PJean/4582
      */
     private async generateCustomAddress(firstName: string, lastName: string): Promise<string> {
-        const firstLetter = lastName.charAt(0).toUpperCase();
-        const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+        const firstLetterLastName = lastName.charAt(0).toUpperCase();
+        const uniqueCode = Math.floor(1000 + Math.random() * 9000); // 4-digit unique code
 
-        let customAddress = `YENGSHIPPING${firstLetter}-${firstName}-${randomNumber}`;
+        let customAddress = `YENGSHIPPING ${firstLetterLastName}${firstName}/${uniqueCode}`;
 
         // Ensure uniqueness
         const existing = await this.prisma.customer.findUnique({
@@ -217,5 +217,32 @@ export class CustomersService {
             fullAddress: customer.fullUSAAddress,
             formattedAddress: customer.fullUSAAddress?.split('\n') || [],
         };
+    }
+
+    async searchByCode(searchTerm: string) {
+        // Search by unique code (e.g., "4582") or partial custom address
+        const customers = await this.prisma.customer.findMany({
+            where: {
+                OR: [
+                    { customAddress: { contains: searchTerm, mode: 'insensitive' as const } },
+                    { customAddress: { endsWith: `/${searchTerm}` } }, // Search by code only
+                ],
+            },
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                phone: true,
+                customAddress: true,
+                fullUSAAddress: true,
+                addressLine1: true,
+                city: true,
+                country: true,
+            },
+            take: 10, // Limit results
+        });
+
+        return customers;
     }
 }

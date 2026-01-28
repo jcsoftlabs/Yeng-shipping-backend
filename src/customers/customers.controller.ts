@@ -16,6 +16,11 @@ export class CustomersController {
         return this.customersService.findAll(search);
     }
 
+    @Get('search/by-code')
+    searchByCode(@Query('code') code: string) {
+        return this.customersService.searchByCode(code);
+    }
+
     @Get('address/:customAddress')
     findByCustomAddress(@Param('customAddress') customAddress: string) {
         return this.customersService.findByCustomAddress(customAddress);
