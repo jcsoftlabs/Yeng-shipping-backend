@@ -7,7 +7,13 @@ async function bootstrap() {
 
   // Enable CORS for frontend apps
   app.enableCors({
-    origin: ['http://localhost:3001', 'http://localhost:3002'],
+    origin: [
+      'http://localhost:3001',
+      'http://localhost:3002',
+      'https://yeng-admin.vercel.app',
+      'https://yeng-admin-iowhbql4g-jerome-christophers-projects.vercel.app',
+      /^https:\/\/yeng-admin-.*\.vercel\.app$/  // Allow all Vercel preview deployments
+    ],
     credentials: true,
   });
 
