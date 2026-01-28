@@ -77,6 +77,64 @@ async function main() {
     });
     console.log('✅ Created test customer:', customer.email);
     console.log('   Custom address:', customer.customAddress);
+    const parcel1 = await prisma.parcel.upsert({
+        where: { trackingNumber: 'YNG-00000001' },
+        update: {},
+        create: {
+            trackingNumber: 'YNG-00000001',
+            barcode: 'BC-00000001',
+            customerId: customer.id,
+            senderName: 'John Smith',
+            senderAddress: '123 Main Street',
+            senderCity: 'Miami',
+            senderState: 'FL',
+            senderZipCode: '33101',
+            senderCountry: 'USA',
+            description: 'Electronics and clothing',
+            weight: 15.5,
+            length: 20,
+            width: 15,
+            height: 10,
+            declaredValue: 250.00,
+            status: 'IN_TRANSIT_HAITI',
+            currentLocation: 'Port-au-Prince, Haiti',
+            shippingFee: 82.50,
+            taxAmount: 8.25,
+            totalAmount: 90.75,
+            paymentStatus: 'PAID',
+            estimatedArrival: new Date('2026-02-05'),
+        },
+    });
+    const parcel2 = await prisma.parcel.upsert({
+        where: { trackingNumber: 'YNG-00000002' },
+        update: {},
+        create: {
+            trackingNumber: 'YNG-00000002',
+            barcode: 'BC-00000002',
+            customerId: customer.id,
+            senderName: 'Mary Johnson',
+            senderAddress: '456 Oak Avenue',
+            senderCity: 'Fort Lauderdale',
+            senderState: 'FL',
+            senderZipCode: '33301',
+            senderCountry: 'USA',
+            description: 'Books and household items',
+            weight: 22.0,
+            length: 24,
+            width: 18,
+            height: 12,
+            declaredValue: 180.00,
+            status: 'READY_FOR_PICKUP',
+            currentLocation: 'Yeng Shipping - Port-au-Prince',
+            shippingFee: 113.60,
+            taxAmount: 11.36,
+            totalAmount: 124.96,
+            paymentStatus: 'PAID',
+        },
+    });
+    console.log('✅ Created test parcels:');
+    console.log('   Parcel 1:', parcel1.trackingNumber, '-', parcel1.status);
+    console.log('   Parcel 2:', parcel2.trackingNumber, '-', parcel2.status);
     console.log('\n📝 Login credentials:');
     console.log('   Admin: admin@yengshipping.com / admin123');
     console.log('   Customer: jean.pierre@example.com / customer123');

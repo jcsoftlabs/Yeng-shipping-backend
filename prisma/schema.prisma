@@ -62,6 +62,7 @@ model Customer {
   lastName        String
   phone           String
   customAddress   String    @unique // YENGSHIPPING + FirstLetter + Name + RandomNumber
+  fullUSAAddress  String?   // Complete USA delivery address with warehouse location
   addressLine1    String?   // Haiti address
   addressLine2    String?
   city            String?

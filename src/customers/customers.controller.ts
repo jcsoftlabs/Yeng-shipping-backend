@@ -16,13 +16,18 @@ export class CustomersController {
         return this.customersService.findAll(search);
     }
 
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.customersService.findOne(id);
-    }
-
     @Get('address/:customAddress')
     findByCustomAddress(@Param('customAddress') customAddress: string) {
         return this.customersService.findByCustomAddress(customAddress);
+    }
+
+    @Get(':id/usa-address')
+    getUSAAddress(@Param('id') id: string) {
+        return this.customersService.getUSAAddress(id);
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.customersService.findOne(id);
     }
 }

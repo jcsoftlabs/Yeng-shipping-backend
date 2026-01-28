@@ -5,6 +5,14 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CustomersService {
+    // Yeng Shipping warehouse address in Miami
+    private readonly WAREHOUSE_ADDRESS = {
+        street: '7829 NW 72nd Ave',
+        city: 'Miami',
+        state: 'FL',
+        zipCode: '33166',
+    };
+
     constructor(private prisma: PrismaService) { }
 
     /**
@@ -31,6 +39,14 @@ export class CustomersService {
         return customAddress;
     }
 
+    /**
+     * Generate full USA delivery address
+     * Combines custom address with warehouse location
+     */
+    private generateFullUSAAddress(customAddress: string): string {
+        return `${customAddress}\n${this.WAREHOUSE_ADDRESS.street}\n${this.WAREHOUSE_ADDRESS.city}, ${this.WAREHOUSE_ADDRESS.state} ${this.WAREHOUSE_ADDRESS.zipCode}`;
+    }
+
     async create(createCustomerDto: CreateCustomerDto) {
         // Check if email already exists
         const existingCustomer = await this.prisma.customer.findUnique({
@@ -47,6 +63,9 @@ export class CustomersService {
             createCustomerDto.lastName,
         );
 
+        // Generate full USA delivery address
+        const fullUSAAddress = this.generateFullUSAAddress(customAddress);
+
         // Hash password if provided
         let hashedPassword: string | undefined;
         if (createCustomerDto.password) {
@@ -60,6 +79,7 @@ export class CustomersService {
                 lastName: createCustomerDto.lastName,
                 phone: createCustomerDto.phone,
                 customAddress,
+                fullUSAAddress,
                 password: hashedPassword,
                 addressLine1: createCustomerDto.addressLine1,
                 addressLine2: createCustomerDto.addressLine2,
@@ -93,6 +113,7 @@ export class CustomersService {
                 lastName: true,
                 phone: true,
                 customAddress: true,
+                fullUSAAddress: true,
                 addressLine1: true,
                 addressLine2: true,
                 city: true,
@@ -171,5 +192,30 @@ export class CustomersService {
         }
 
         return customer;
+    }
+
+    async getUSAAddress(id: string) {
+        const customer = await this.prisma.customer.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                customAddress: true,
+                fullUSAAddress: true,
+            },
+        });
+
+        if (!customer) {
+            throw new NotFoundException('Client non trouvé');
+        }
+
+        return {
+            customerId: customer.id,
+            customerName: `${customer.firstName} ${customer.lastName}`,
+            customAddress: customer.customAddress,
+            fullAddress: customer.fullUSAAddress,
+            formattedAddress: customer.fullUSAAddress?.split('\n') || [],
+        };
     }
 }
