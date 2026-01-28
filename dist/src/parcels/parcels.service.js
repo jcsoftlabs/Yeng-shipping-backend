@@ -30,10 +30,10 @@ let ParcelsService = class ParcelsService {
         return trackingNumber;
     }
     calculateShippingFee(weight, declaredValue) {
-        const baseRate = 5;
-        const weightFee = weight * baseRate;
-        const insuranceFee = declaredValue * 0.02;
-        return Math.round((weightFee + insuranceFee) * 100) / 100;
+        const weightFee = weight * 3;
+        const valueFee = declaredValue * 0.02;
+        const shippingFee = weightFee + valueFee;
+        return Math.round(shippingFee * 100) / 100;
     }
     calculateTax(shippingFee) {
         return Math.round(shippingFee * 0.1 * 100) / 100;
@@ -130,6 +130,9 @@ let ParcelsService = class ParcelsService {
                 { trackingNumber: { contains: filters.search, mode: 'insensitive' } },
                 { barcode: { contains: filters.search, mode: 'insensitive' } },
                 { description: { contains: filters.search, mode: 'insensitive' } },
+                { customer: { customAddress: { contains: filters.search, mode: 'insensitive' } } },
+                { customer: { firstName: { contains: filters.search, mode: 'insensitive' } } },
+                { customer: { lastName: { contains: filters.search, mode: 'insensitive' } } },
             ];
         }
         const parcels = await this.prisma.parcel.findMany({

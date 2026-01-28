@@ -15,11 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaymentsController = void 0;
 const common_1 = require("@nestjs/common");
 const payments_service_1 = require("./payments.service");
+const receipt_service_1 = require("./receipt.service");
 const create_payment_dto_1 = require("./dto/create-payment.dto");
 let PaymentsController = class PaymentsController {
     paymentsService;
-    constructor(paymentsService) {
+    receiptService;
+    constructor(paymentsService, receiptService) {
         this.paymentsService = paymentsService;
+        this.receiptService = receiptService;
     }
     create(createPaymentDto) {
         return this.paymentsService.create(createPaymentDto);
@@ -29,6 +32,15 @@ let PaymentsController = class PaymentsController {
     }
     findOne(id) {
         return this.paymentsService.findOne(id);
+    }
+    async downloadReceipt(id, res) {
+        const receiptBuffer = await this.receiptService.generateThermalReceipt(id);
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': `attachment; filename=receipt-${id.substring(0, 8)}.pdf`,
+            'Content-Length': receiptBuffer.length,
+        });
+        res.end(receiptBuffer);
     }
 };
 exports.PaymentsController = PaymentsController;
@@ -53,8 +65,17 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], PaymentsController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)(':id/receipt'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], PaymentsController.prototype, "downloadReceipt", null);
 exports.PaymentsController = PaymentsController = __decorate([
     (0, common_1.Controller)('payments'),
-    __metadata("design:paramtypes", [payments_service_1.PaymentsService])
+    __metadata("design:paramtypes", [payments_service_1.PaymentsService,
+        receipt_service_1.ReceiptService])
 ], PaymentsController);
 //# sourceMappingURL=payments.controller.js.map

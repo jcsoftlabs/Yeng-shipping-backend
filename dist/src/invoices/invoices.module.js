@@ -6,19 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentsModule = void 0;
+exports.InvoicesModule = void 0;
 const common_1 = require("@nestjs/common");
-const payments_service_1 = require("./payments.service");
-const payments_controller_1 = require("./payments.controller");
-const receipt_service_1 = require("./receipt.service");
-let PaymentsModule = class PaymentsModule {
+const invoices_controller_1 = require("./invoices.controller");
+const invoices_service_1 = require("./invoices.service");
+const prisma_module_1 = require("../prisma/prisma.module");
+let InvoicesModule = class InvoicesModule {
 };
-exports.PaymentsModule = PaymentsModule;
-exports.PaymentsModule = PaymentsModule = __decorate([
+exports.InvoicesModule = InvoicesModule;
+exports.InvoicesModule = InvoicesModule = __decorate([
     (0, common_1.Module)({
-        controllers: [payments_controller_1.PaymentsController],
-        providers: [payments_service_1.PaymentsService, receipt_service_1.ReceiptService],
-        exports: [payments_service_1.PaymentsService],
+        imports: [prisma_module_1.PrismaModule],
+        controllers: [invoices_controller_1.InvoicesController],
+        providers: [invoices_service_1.InvoicesService],
+        exports: [invoices_service_1.InvoicesService],
     })
-], PaymentsModule);
-//# sourceMappingURL=payments.module.js.map
+], InvoicesModule);
+//# sourceMappingURL=invoices.module.js.map

@@ -1,27 +1,16 @@
-import { PaymentsService } from './payments.service';
-import { ReceiptService } from './receipt.service';
-import { CreatePaymentDto } from './dto/create-payment.dto';
+import { InvoicesService } from './invoices.service';
 import type { Response } from 'express';
-export declare class PaymentsController {
-    private readonly paymentsService;
-    private readonly receiptService;
-    constructor(paymentsService: PaymentsService, receiptService: ReceiptService);
-    create(createPaymentDto: CreatePaymentDto): Promise<{
-        id: string;
-        createdAt: Date;
-        notes: string | null;
-        parcelId: string;
-        amount: number;
-        method: import("@prisma/client").$Enums.PaymentMethod;
-        reference: string | null;
-        receivedBy: string | null;
-    }>;
-    findAll(parcelId?: string): Promise<({
+export declare class InvoicesController {
+    private readonly invoicesService;
+    constructor(invoicesService: InvoicesService);
+    findAll(customerId?: string, status?: string, search?: string): Promise<({
         parcel: {
             customer: {
+                id: string;
                 email: string;
                 firstName: string;
                 lastName: string;
+                customAddress: string;
             };
         } & {
             id: string;
@@ -55,12 +44,16 @@ export declare class PaymentsController {
     } & {
         id: string;
         createdAt: Date;
+        updatedAt: Date;
+        status: import("@prisma/client").$Enums.PaymentStatus;
+        taxAmount: number;
+        totalAmount: number;
         notes: string | null;
         parcelId: string;
-        amount: number;
-        method: import("@prisma/client").$Enums.PaymentMethod;
-        reference: string | null;
-        receivedBy: string | null;
+        invoiceNumber: string;
+        subtotal: number;
+        dueDate: Date | null;
+        paidDate: Date | null;
     })[]>;
     findOne(id: string): Promise<{
         parcel: {
@@ -81,6 +74,16 @@ export declare class PaymentsController {
                 createdAt: Date;
                 updatedAt: Date;
             };
+            payments: {
+                id: string;
+                createdAt: Date;
+                notes: string | null;
+                parcelId: string;
+                amount: number;
+                method: import("@prisma/client").$Enums.PaymentMethod;
+                reference: string | null;
+                receivedBy: string | null;
+            }[];
         } & {
             id: string;
             createdAt: Date;
@@ -113,12 +116,19 @@ export declare class PaymentsController {
     } & {
         id: string;
         createdAt: Date;
+        updatedAt: Date;
+        status: import("@prisma/client").$Enums.PaymentStatus;
+        taxAmount: number;
+        totalAmount: number;
         notes: string | null;
         parcelId: string;
-        amount: number;
-        method: import("@prisma/client").$Enums.PaymentMethod;
-        reference: string | null;
-        receivedBy: string | null;
+        invoiceNumber: string;
+        subtotal: number;
+        dueDate: Date | null;
+        paidDate: Date | null;
     }>;
-    downloadReceipt(id: string, res: Response): Promise<void>;
+    downloadPDF(id: string, res: Response): Promise<void>;
+    sendEmail(id: string): Promise<{
+        message: string;
+    }>;
 }
