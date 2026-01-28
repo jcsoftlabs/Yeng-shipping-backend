@@ -118,6 +118,39 @@ async function main() {
     console.log('   Parcel 1:', parcel1.trackingNumber, '-', parcel1.status);
     console.log('   Parcel 2:', parcel2.trackingNumber, '-', parcel2.status);
 
+    // Create payments for the parcels
+    const payment1 = await prisma.payment.upsert({
+        where: { id: 'payment-seed-1' },
+        update: {},
+        create: {
+            id: 'payment-seed-1',
+            parcelId: parcel1.id,
+            amount: 90.75, // Full amount for parcel 1
+            method: 'CASH',
+            reference: 'CASH-001',
+            receivedBy: 'Admin',
+            notes: 'Paiement complet en espèces',
+        },
+    });
+
+    const payment2 = await prisma.payment.upsert({
+        where: { id: 'payment-seed-2' },
+        update: {},
+        create: {
+            id: 'payment-seed-2',
+            parcelId: parcel2.id,
+            amount: 50.00, // Partial payment for parcel 2
+            method: 'MONCASH',
+            reference: 'MC-12345',
+            receivedBy: 'Admin',
+            notes: 'Paiement partiel via MonCash',
+        },
+    });
+
+    console.log('✅ Created test payments:');
+    console.log('   Payment 1: $' + payment1.amount + ' (' + payment1.method + ')');
+    console.log('   Payment 2: $' + payment2.amount + ' (' + payment2.method + ')');
+
     console.log('\n📝 Login credentials:');
     console.log('   Admin: admin@yengshipping.com / admin123');
     console.log('   Customer: jean.pierre@example.com / customer123');
