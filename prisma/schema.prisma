@@ -1,0 +1,190 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum ParcelStatus {
+  PENDING           // Waiting to be shipped from USA
+  IN_TRANSIT_USA    // In transit within USA
+  DEPARTED_USA      // Left USA
+  IN_TRANSIT_HAITI  // In transit to Haiti
+  ARRIVED_HAITI     // Arrived in Haiti warehouse
+  READY_FOR_PICKUP  // Payment received, ready for customer pickup
+  PICKED_UP         // Customer picked up the parcel
+  CANCELLED         // Cancelled
+}
+
+enum PaymentStatus {
+  PENDING
+  PARTIAL
+  PAID
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  MONCASH
+  CARD
+  BANK_TRANSFER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      UserRole @default(STAFF)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Customer {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  password        String?   // Optional for customers who only track parcels
+  firstName       String
+  lastName        String
+  phone           String
+  customAddress   String    @unique // YENGSHIPPING + FirstLetter + Name + RandomNumber
+  addressLine1    String?   // Haiti address
+  addressLine2    String?
+  city            String?
+  country         String    @default("Haiti")
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  parcels         Parcel[]
+  
+  @@map("customers")
+}
+
+model Parcel {
+  id                String        @id @default(uuid())
+  trackingNumber    String        @unique // YNG prefix
+  barcode           String?       @unique
+  customerId        String
+  customer          Customer      @relation(fields: [customerId], references: [id])
+  
+  // Sender information (USA)
+  senderName        String
+  senderAddress     String
+  senderCity        String
+  senderState       String
+  senderZipCode     String
+  senderCountry     String        @default("USA")
+  
+  // Package details
+  description       String
+  weight            Float         // in lbs (pounds)
+  length            Float?        // in cm
+  width             Float?        // in cm
+  height            Float?        // in cm
+  declaredValue     Float         // in USD
+  
+  // Status and tracking
+  status            ParcelStatus  @default(PENDING)
+  currentLocation   String?
+  estimatedArrival  DateTime?
+  
+  // Financial (can be set manually by admin)
+  shippingFee       Float         @default(0)
+  discount          Float         @default(0)  // Discount amount
+  taxAmount         Float         @default(0)
+  totalAmount       Float         @default(0)  // shippingFee - discount + taxAmount
+  paymentStatus     PaymentStatus @default(PENDING)
+  
+  // Metadata
+  notes             String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  trackingEvents    TrackingEvent[]
+  invoices          Invoice[]
+  payments          Payment[]
+  
+  @@map("parcels")
+}
+
+model TrackingEvent {
+  id          String   @id @default(uuid())
+  parcelId    String
+  parcel      Parcel   @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  
+  status      ParcelStatus
+  location    String
+  description String
+  timestamp   DateTime @default(now())
+  createdBy   String?  // User ID who created this event
+  
+  @@map("tracking_events")
+  @@index([parcelId])
+}
+
+model Invoice {
+  id              String        @id @default(uuid())
+  invoiceNumber   String        @unique
+  parcelId        String
+  parcel          Parcel        @relation(fields: [parcelId], references: [id])
+  
+  // Amounts
+  subtotal        Float
+  taxAmount       Float
+  totalAmount     Float
+  
+  // Status
+  status          PaymentStatus @default(PENDING)
+  dueDate         DateTime?
+  paidDate        DateTime?
+  
+  // Metadata
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  @@map("invoices")
+}
+
+model Payment {
+  id              String        @id @default(uuid())
+  parcelId        String
+  parcel          Parcel        @relation(fields: [parcelId], references: [id])
+  
+  amount          Float
+  method          PaymentMethod
+  reference       String?       // Transaction reference
+  
+  receivedBy      String?       // Staff member who received payment
+  notes           String?
+  
+  createdAt       DateTime      @default(now())
+  
+  @@map("payments")
+  @@index([parcelId])
+}
+
+model Settings {
+  id                  String   @id @default(uuid())
+  key                 String   @unique
+  value               String
+  description         String?
+  updatedAt           DateTime @updatedAt
+  
+  @@map("settings")
+}
