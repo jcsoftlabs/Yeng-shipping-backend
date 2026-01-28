@@ -35,6 +35,15 @@ export class ReceiptService {
             doc.on('end', () => resolve(Buffer.concat(buffers)));
             doc.on('error', reject);
 
+            // Logo (centered, grayscale for thermal printer)
+            try {
+                const logoPath = require.resolve('../../assets/logo.png');
+                doc.image(logoPath, 52, doc.y, { width: 60, fit: [60, 60] });
+                doc.moveDown(4);
+            } catch (e) {
+                // If logo not found, skip it
+            }
+
             // Company Header
             doc.fontSize(10).font('Helvetica-Bold').text('YENG SHIPPING', { align: 'center' });
             doc.fontSize(8).font('Helvetica').text('SERVICE', { align: 'center' });
