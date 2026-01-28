@@ -8,6 +8,7 @@ import { CustomersModule } from './customers/customers.module';
 import { ParcelsModule } from './parcels/parcels.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ReportsModule } from './reports/reports.module';
+import { InvoicesModule } from './invoices/invoices.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ReportsModule } from './reports/reports.module';
     ParcelsModule,
     PaymentsModule,
     ReportsModule,
+    InvoicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
