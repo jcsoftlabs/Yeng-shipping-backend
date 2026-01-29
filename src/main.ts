@@ -10,9 +10,15 @@ async function bootstrap() {
     origin: [
       'http://localhost:3001',
       'http://localhost:3002',
+      // Admin Dashboard
       'https://yeng-admin.vercel.app',
       'https://yeng-admin-iowhbql4g-jerome-christophers-projects.vercel.app',
-      /^https:\/\/yeng-admin-.*\.vercel\.app$/  // Allow all Vercel preview deployments
+      /^https:\/\/yeng-admin-.*\.vercel\.app$/,  // All admin preview deployments
+      // Client Portal
+      'https://client-yeng.vercel.app',
+      'https://client-yeng-k3ih3ohwg-jerome-christophers-projects.vercel.app',
+      'https://client-yeng-28csgmd37-jerome-christophers-projects.vercel.app',
+      /^https:\/\/client-yeng-.*\.vercel\.app$/,  // All client preview deployments
     ],
     credentials: true,
   });
