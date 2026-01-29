@@ -35,19 +35,28 @@ export class ParcelsController {
         try {
             const token = authHeader.split(' ')[1];
             const payload = await this.authService.validateToken(token);
+            console.log('DEBUG: User role:', payload.role);
+            console.log('DEBUG: User ID:', payload.sub);
 
-            // Security: If user is a CUSTOMER, force filtering by their own ID
-            if (payload.role === 'CUSTOMER') {
+            // Security: Secure by default. Only enable unfiltered access for ADMIN/STAFF.
+            // All other roles (CUSTOMER or undefined) are restricted to their own data.
+            if (payload.role === 'ADMIN' || payload.role === 'STAFF') {
+                console.log('DEBUG: User is ADMIN/STAFF. Full access granted.');
+                // Allow customerId from query or undefined (all)
+            } else {
+                // Default: Assume customer or unknown -> restrict to own ID
                 finalCustomerId = payload.sub;
+                console.log('DEBUG: User restricted to own ID:', finalCustomerId);
             }
         } catch (error) {
+            console.error('DEBUG: Token validation error:', error);
             throw new UnauthorizedException('Session invalide');
         }
 
         return this.parcelsService.findAll({ status, customerId: finalCustomerId, search });
     }
 
-    @Get('tracking/:trackingNumber')
+    @Get('track/:trackingNumber')
     findByTracking(@Param('trackingNumber') trackingNumber: string) {
         return this.parcelsService.findByTracking(trackingNumber);
     }

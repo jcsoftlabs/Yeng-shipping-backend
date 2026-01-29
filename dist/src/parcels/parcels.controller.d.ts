@@ -11,9 +11,9 @@ export declare class ParcelsController {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
     } & {
         id: string;
@@ -48,9 +48,9 @@ export declare class ParcelsController {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
     } & {
         id: string;
@@ -84,18 +84,18 @@ export declare class ParcelsController {
     findByTracking(trackingNumber: string): Promise<{
         customer: {
             id: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
         trackingEvents: {
             id: string;
             description: string;
             status: import("@prisma/client").$Enums.ParcelStatus;
-            parcelId: string;
             location: string;
             timestamp: Date;
             createdBy: string | null;
+            parcelId: string;
         }[];
     } & {
         id: string;
@@ -130,9 +130,9 @@ export declare class ParcelsController {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
     } & {
         id: string;
@@ -167,11 +167,11 @@ export declare class ParcelsController {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             password: string | null;
             firstName: string;
             lastName: string;
             phone: string;
-            customAddress: string;
             fullUSAAddress: string | null;
             addressLine1: string | null;
             addressLine2: string | null;
@@ -185,10 +185,10 @@ export declare class ParcelsController {
             id: string;
             description: string;
             status: import("@prisma/client").$Enums.ParcelStatus;
-            parcelId: string;
             location: string;
             timestamp: Date;
             createdBy: string | null;
+            parcelId: string;
         }[];
         invoices: {
             id: string;
@@ -247,11 +247,11 @@ export declare class ParcelsController {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             password: string | null;
             firstName: string;
             lastName: string;
             phone: string;
-            customAddress: string;
             fullUSAAddress: string | null;
             addressLine1: string | null;
             addressLine2: string | null;

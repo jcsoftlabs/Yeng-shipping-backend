@@ -13,10 +13,13 @@ exports.ParcelsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const client_1 = require("@prisma/client");
+const email_service_1 = require("../email/email.service");
 let ParcelsService = class ParcelsService {
     prisma;
-    constructor(prisma) {
+    emailService;
+    constructor(prisma, emailService) {
         this.prisma = prisma;
+        this.emailService = emailService;
     }
     async generateTrackingNumber() {
         const randomDigits = Math.floor(10000000 + Math.random() * 90000000);
@@ -115,6 +118,18 @@ let ParcelsService = class ParcelsService {
             },
         });
         await this.generateInvoice(parcel.id);
+        try {
+            const parcelWithCustomer = await this.prisma.parcel.findUnique({
+                where: { id: parcel.id },
+                include: { customer: true },
+            });
+            if (parcelWithCustomer) {
+                await this.emailService.sendParcelCreatedEmail(parcelWithCustomer);
+            }
+        }
+        catch (error) {
+            console.error('Failed to send parcel created email:', error);
+        }
         return parcel;
     }
     async findAll(filters) {
@@ -213,6 +228,7 @@ let ParcelsService = class ParcelsService {
     }
     async updateStatus(id, updateStatusDto) {
         const parcel = await this.findOne(id);
+        const oldStatus = parcel.status;
         const updatedParcel = await this.prisma.parcel.update({
             where: { id },
             data: {
@@ -231,6 +247,14 @@ let ParcelsService = class ParcelsService {
                 description: updateStatusDto.description || this.getStatusDescription(updateStatusDto.status),
             },
         });
+        if (oldStatus !== updateStatusDto.status) {
+            try {
+                await this.emailService.sendParcelStatusUpdatedEmail(updatedParcel, oldStatus, updateStatusDto.status);
+            }
+            catch (error) {
+                console.error('Failed to send status update email:', error);
+            }
+        }
         return updatedParcel;
     }
     getStatusDescription(status) {
@@ -263,6 +287,7 @@ let ParcelsService = class ParcelsService {
 exports.ParcelsService = ParcelsService;
 exports.ParcelsService = ParcelsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        email_service_1.EmailService])
 ], ParcelsService);
 //# sourceMappingURL=parcels.service.js.map

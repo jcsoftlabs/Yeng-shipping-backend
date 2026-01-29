@@ -3,10 +3,14 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateParcelDto } from './dto/create-parcel.dto';
 import { UpdateParcelStatusDto } from './dto/update-parcel-status.dto';
 import { ParcelStatus } from '@prisma/client';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class ParcelsService {
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private prisma: PrismaService,
+        private emailService: EmailService,
+    ) { }
 
     /**
      * Generate tracking number with YNG prefix
@@ -145,6 +149,20 @@ export class ParcelsService {
         // Auto-generate invoice
         await this.generateInvoice(parcel.id);
 
+        // 🆕 Send email notification
+        try {
+            const parcelWithCustomer = await this.prisma.parcel.findUnique({
+                where: { id: parcel.id },
+                include: { customer: true },
+            });
+            if (parcelWithCustomer) {
+                await this.emailService.sendParcelCreatedEmail(parcelWithCustomer as any);
+            }
+        } catch (error) {
+            console.error('Failed to send parcel created email:', error);
+            // Don't throw - email failure shouldn't block parcel creation
+        }
+
         return parcel;
     }
 
@@ -263,6 +281,7 @@ export class ParcelsService {
 
     async updateStatus(id: string, updateStatusDto: UpdateParcelStatusDto) {
         const parcel = await this.findOne(id);
+        const oldStatus = parcel.status;
 
         // Update parcel status
         const updatedParcel = await this.prisma.parcel.update({
@@ -285,6 +304,20 @@ export class ParcelsService {
                 description: updateStatusDto.description || this.getStatusDescription(updateStatusDto.status),
             },
         });
+
+        // 🆕 Send email notification if status changed
+        if (oldStatus !== updateStatusDto.status) {
+            try {
+                await this.emailService.sendParcelStatusUpdatedEmail(
+                    updatedParcel as any,
+                    oldStatus,
+                    updateStatusDto.status,
+                );
+            } catch (error) {
+                console.error('Failed to send status update email:', error);
+                // Don't throw - email failure shouldn't block status update
+            }
+        }
 
         return updatedParcel;
     }

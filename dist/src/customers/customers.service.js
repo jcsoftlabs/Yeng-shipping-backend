@@ -46,16 +46,19 @@ exports.CustomersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = __importStar(require("bcrypt"));
+const email_service_1 = require("../email/email.service");
 let CustomersService = class CustomersService {
     prisma;
+    emailService;
     WAREHOUSE_ADDRESS = {
         street: '7829 NW 72nd Ave',
         city: 'Miami',
         state: 'FL',
         zipCode: '33166',
     };
-    constructor(prisma) {
+    constructor(prisma, emailService) {
         this.prisma = prisma;
+        this.emailService = emailService;
     }
     async generateCustomAddress(firstName, lastName) {
         const firstLetterLastName = lastName.charAt(0).toUpperCase();
@@ -99,6 +102,12 @@ let CustomersService = class CustomersService {
                 city: createCustomerDto.city,
             },
         });
+        try {
+            await this.emailService.sendWelcomeEmail(customer);
+        }
+        catch (error) {
+            console.error('Failed to send welcome email:', error);
+        }
         const { password, ...result } = customer;
         return result;
     }
@@ -245,6 +254,7 @@ let CustomersService = class CustomersService {
 exports.CustomersService = CustomersService;
 exports.CustomersService = CustomersService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        email_service_1.EmailService])
 ], CustomersService);
 //# sourceMappingURL=customers.service.js.map

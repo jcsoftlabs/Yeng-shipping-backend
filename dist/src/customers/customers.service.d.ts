@@ -1,18 +1,20 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { EmailService } from '../email/email.service';
 export declare class CustomersService {
     private prisma;
+    private emailService;
     private readonly WAREHOUSE_ADDRESS;
-    constructor(prisma: PrismaService);
+    constructor(prisma: PrismaService, emailService: EmailService);
     private generateCustomAddress;
     private generateFullUSAAddress;
     create(createCustomerDto: CreateCustomerDto): Promise<{
         id: string;
         email: string;
+        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
-        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -25,10 +27,10 @@ export declare class CustomersService {
     findAll(search?: string): Promise<{
         id: string;
         email: string;
+        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
-        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -44,10 +46,10 @@ export declare class CustomersService {
     findOne(id: string): Promise<{
         id: string;
         email: string;
+        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
-        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -89,11 +91,11 @@ export declare class CustomersService {
     findByEmail(email: string): Promise<{
         id: string;
         email: string;
+        customAddress: string;
         password: string | null;
         firstName: string;
         lastName: string;
         phone: string;
-        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -106,10 +108,10 @@ export declare class CustomersService {
     findByCustomAddress(customAddress: string): Promise<{
         id: string;
         email: string;
+        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
-        customAddress: string;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;
@@ -127,10 +129,10 @@ export declare class CustomersService {
     searchByCode(searchTerm: string): Promise<{
         id: string;
         email: string;
+        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
-        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         city: string | null;

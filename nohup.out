@@ -610,3 +610,323 @@ Error: listen EADDRINUSE: address already in use :::3000
 }
 
 Node.js v22.19.0
+[2J[3J[H[[90m6:57:17 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m6:57:17 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +14ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInvoicesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCustomersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mParcelsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +22ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/customer-login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCustomersController {/customers}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/me, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/search/by-code, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/address/:customAddress, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id/usa-address, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mParcelsController {/parcels}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/tracking/:trackingNumber, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/barcode/:barcode, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id/status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentsController {/payments}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id/receipt, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReportsController {/reports}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/dashboard, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/shipping-volume, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/revenue, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/status-breakdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/top-customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/monthly, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/customer-growth, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/export/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInvoicesController {/invoices}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/pdf, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/send-email, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +57ms[39m
+[31m[Nest] 26105  - [39m01/28/2026, 6:57:18 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +2ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:178:16)
+    at async bootstrap (/Users/christopherjerome/yeng/backend/src/main.ts:26:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v22.19.0
+
+> backend@0.0.1 start:dev
+> nest start --watch
+
+[2J[3J[H[[90m6:57:21 PM[0m] Starting compilation in watch mode...
+
+[[90m6:57:24 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +14ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInvoicesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCustomersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mParcelsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +19ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/customer-login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCustomersController {/customers}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/me, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/search/by-code, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/address/:customAddress, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id/usa-address, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mParcelsController {/parcels}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/tracking/:trackingNumber, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/barcode/:barcode, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id/status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentsController {/payments}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id/receipt, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReportsController {/reports}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/dashboard, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/shipping-volume, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/revenue, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/status-breakdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/top-customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/monthly, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/customer-growth, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/export/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInvoicesController {/invoices}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/pdf, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:24 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/send-email, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26343  - [39m01/28/2026, 6:57:25 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +52ms[39m
+[31m[Nest] 26343  - [39m01/28/2026, 6:57:25 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +2ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:178:16)
+    at async bootstrap (/Users/christopherjerome/yeng/backend/src/main.ts:26:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v22.19.0
+[2J[3J[H[[90m6:57:55 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m6:57:56 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +22ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInvoicesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCustomersModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mParcelsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +32ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/customer-login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCustomersController {/customers}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/me, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/search/by-code, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/address/:customAddress, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id/usa-address, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mParcelsController {/parcels}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/tracking/:trackingNumber, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/barcode/:barcode, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id/status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentsController {/payments}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id/receipt, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReportsController {/reports}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/dashboard, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/shipping-volume, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/revenue, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/status-breakdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/top-customers, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/monthly, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/customer-growth, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/export/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInvoicesController {/invoices}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/pdf, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/send-email, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +97ms[39m
+[31m[Nest] 26364  - [39m01/28/2026, 6:57:57 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +2ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:178:16)
+    at async bootstrap (/Users/christopherjerome/yeng/backend/src/main.ts:26:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v22.19.0
+
+> backend@0.0.1 start:dev
+> nest start --watch
+
+[2J[3J[H[[90m6:57:59 PM[0m] Starting compilation in watch mode...
+
+[[90m6:58:02 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +35ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInvoicesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCustomersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mParcelsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +32ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/customer-login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCustomersController {/customers}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/me, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/search/by-code, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/address/:customAddress, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id/usa-address, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/customers/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mParcelsController {/parcels}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/tracking/:trackingNumber, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/barcode/:barcode, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/parcels/:id/status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentsController {/payments}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/:id/receipt, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReportsController {/reports}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/dashboard, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/shipping-volume, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/revenue, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/status-breakdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/top-customers, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/monthly, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/customer-growth, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reports/export/parcels, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInvoicesController {/invoices}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/pdf, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/invoices/:id/send-email, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +58ms[39m
+[31m[Nest] 26541  - [39m01/28/2026, 6:58:02 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +1ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/christopherjerome/yeng/backend/node_modules/@nestjs/core/nest-application.js:178:16)
+    at async bootstrap (/Users/christopherjerome/yeng/backend/src/main.ts:26:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v22.19.0

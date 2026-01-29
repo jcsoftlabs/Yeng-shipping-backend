@@ -38,11 +38,18 @@ let ParcelsController = class ParcelsController {
         try {
             const token = authHeader.split(' ')[1];
             const payload = await this.authService.validateToken(token);
-            if (payload.role === 'CUSTOMER') {
+            console.log('DEBUG: User role:', payload.role);
+            console.log('DEBUG: User ID:', payload.sub);
+            if (payload.role === 'ADMIN' || payload.role === 'STAFF') {
+                console.log('DEBUG: User is ADMIN/STAFF. Full access granted.');
+            }
+            else {
                 finalCustomerId = payload.sub;
+                console.log('DEBUG: User restricted to own ID:', finalCustomerId);
             }
         }
         catch (error) {
+            console.error('DEBUG: Token validation error:', error);
             throw new common_1.UnauthorizedException('Session invalide');
         }
         return this.parcelsService.findAll({ status, customerId: finalCustomerId, search });
@@ -79,7 +86,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ParcelsController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('tracking/:trackingNumber'),
+    (0, common_1.Get)('track/:trackingNumber'),
     __param(0, (0, common_1.Param)('trackingNumber')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

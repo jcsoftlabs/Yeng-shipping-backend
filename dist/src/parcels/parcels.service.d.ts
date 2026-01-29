@@ -2,9 +2,11 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateParcelDto } from './dto/create-parcel.dto';
 import { UpdateParcelStatusDto } from './dto/update-parcel-status.dto';
 import { ParcelStatus } from '@prisma/client';
+import { EmailService } from '../email/email.service';
 export declare class ParcelsService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private emailService;
+    constructor(prisma: PrismaService, emailService: EmailService);
     private generateTrackingNumber;
     private calculateShippingFee;
     private calculateTax;
@@ -12,9 +14,9 @@ export declare class ParcelsService {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
     } & {
         id: string;
@@ -53,9 +55,9 @@ export declare class ParcelsService {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
     } & {
         id: string;
@@ -90,11 +92,11 @@ export declare class ParcelsService {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             password: string | null;
             firstName: string;
             lastName: string;
             phone: string;
-            customAddress: string;
             fullUSAAddress: string | null;
             addressLine1: string | null;
             addressLine2: string | null;
@@ -108,10 +110,10 @@ export declare class ParcelsService {
             id: string;
             description: string;
             status: import("@prisma/client").$Enums.ParcelStatus;
-            parcelId: string;
             location: string;
             timestamp: Date;
             createdBy: string | null;
+            parcelId: string;
         }[];
         invoices: {
             id: string;
@@ -169,18 +171,18 @@ export declare class ParcelsService {
     findByTracking(trackingNumber: string): Promise<{
         customer: {
             id: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
         trackingEvents: {
             id: string;
             description: string;
             status: import("@prisma/client").$Enums.ParcelStatus;
-            parcelId: string;
             location: string;
             timestamp: Date;
             createdBy: string | null;
+            parcelId: string;
         }[];
     } & {
         id: string;
@@ -215,9 +217,9 @@ export declare class ParcelsService {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             firstName: string;
             lastName: string;
-            customAddress: string;
         };
     } & {
         id: string;
@@ -252,11 +254,11 @@ export declare class ParcelsService {
         customer: {
             id: string;
             email: string;
+            customAddress: string;
             password: string | null;
             firstName: string;
             lastName: string;
             phone: string;
-            customAddress: string;
             fullUSAAddress: string | null;
             addressLine1: string | null;
             addressLine2: string | null;

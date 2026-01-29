@@ -2,6 +2,7 @@ import { Injectable, ConflictException, NotFoundException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import * as bcrypt from 'bcrypt';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class CustomersService {
@@ -13,7 +14,10 @@ export class CustomersService {
         zipCode: '33166',
     };
 
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private prisma: PrismaService,
+        private emailService: EmailService,
+    ) { }
 
     /**
      * Generate custom shipping address
@@ -86,6 +90,14 @@ export class CustomersService {
                 city: createCustomerDto.city,
             },
         });
+
+        // 🆕 Send welcome email
+        try {
+            await this.emailService.sendWelcomeEmail(customer as any);
+        } catch (error) {
+            console.error('Failed to send welcome email:', error);
+            // Don't throw - email failure shouldn't block registration
+        }
 
         // Don't return password
         const { password, ...result } = customer;
