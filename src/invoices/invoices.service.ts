@@ -95,8 +95,10 @@ export class InvoicesService {
             doc.on('error', reject);
 
             // Header with Logo
-            const logoPath = require.resolve('../../assets/logo.png');
-            doc.image(logoPath, 50, 45, { width: 60 });
+            const logoPath = require('path').join(__dirname, '../assets/logo.png');
+            if (require('fs').existsSync(logoPath)) {
+                doc.image(logoPath, 50, 45, { width: 60 });
+            }
 
             doc.fontSize(20).text('YENG SHIPPING', 120, 50);
             doc.fontSize(10).text('7829 NW 72nd Ave, Miami, FL 33166', 120, 75);
