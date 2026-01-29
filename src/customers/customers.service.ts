@@ -91,13 +91,10 @@ export class CustomersService {
             },
         });
 
-        // 🆕 Send welcome email
-        try {
-            await this.emailService.sendWelcomeEmail(customer as any);
-        } catch (error) {
+        // 🆕 Send welcome email (Fire and forget - don't block response)
+        this.emailService.sendWelcomeEmail(customer as any).catch(error => {
             console.error('Failed to send welcome email:', error);
-            // Don't throw - email failure shouldn't block registration
-        }
+        });
 
         // Don't return password
         const { password, ...result } = customer;
