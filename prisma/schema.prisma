@@ -68,6 +68,8 @@ model Customer {
   city            String?
   country         String    @default("Haiti")
   isActive        Boolean   @default(true)
+  resetToken      String?
+  resetTokenExpires DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   

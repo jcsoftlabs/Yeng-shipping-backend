@@ -3,12 +3,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 
+import { EmailModule } from '../email/email.module';
+
 @Module({
     imports: [
         JwtModule.register({
             secret: process.env.JWT_SECRET || 'yeng-shipping-secret-key',
             signOptions: { expiresIn: '7d' },
         }),
+        EmailModule,
     ],
     controllers: [AuthController],
     providers: [AuthService],

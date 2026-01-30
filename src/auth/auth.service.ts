@@ -1,14 +1,19 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
+import { EmailService } from '../email/email.service';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthService {
     constructor(
         private prisma: PrismaService,
         private jwtService: JwtService,
+        private emailService: EmailService,
     ) { }
 
     async login(loginDto: LoginDto) {
@@ -93,5 +98,65 @@ export class AuthService {
         } catch {
             throw new UnauthorizedException('Token invalide');
         }
+    }
+
+    async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
+        const customer = await this.prisma.customer.findUnique({
+            where: { email: forgotPasswordDto.email },
+        });
+
+        if (!customer) {
+            // Don't reveal if user exists
+            return { message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' };
+        }
+
+        // Generate reset token
+        const resetToken = uuidv4();
+        // Expires in 30 minutes
+        const resetTokenExpires = new Date(Date.now() + 30 * 60 * 1000);
+
+        await this.prisma.customer.update({
+            where: { id: customer.id },
+            data: {
+                resetToken,
+                resetTokenExpires,
+            },
+        });
+
+        // Send email
+        await this.emailService.sendPasswordResetEmail(customer, resetToken);
+
+        return { message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' };
+    }
+
+    async resetPassword(resetPasswordDto: ResetPasswordDto) {
+        // Find user with valid token
+        const customer = await this.prisma.customer.findFirst({
+            where: {
+                resetToken: resetPasswordDto.token,
+                resetTokenExpires: {
+                    gt: new Date(),
+                },
+            },
+        });
+
+        if (!customer) {
+            throw new BadRequestException('Lien invalide ou expiré');
+        }
+
+        // Hash new password
+        const hashedPassword = await bcrypt.hash(resetPasswordDto.password, 10);
+
+        // Update customer
+        await this.prisma.customer.update({
+            where: { id: customer.id },
+            data: {
+                password: hashedPassword,
+                resetToken: null,
+                resetTokenExpires: null,
+            },
+        });
+
+        return { message: 'Mot de passe réinitialisé avec succès' };
     }
 }

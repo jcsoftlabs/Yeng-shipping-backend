@@ -11,7 +11,11 @@ async function bootstrap() {
             'http://localhost:3002',
             'https://yeng-admin.vercel.app',
             'https://yeng-admin-iowhbql4g-jerome-christophers-projects.vercel.app',
-            /^https:\/\/yeng-admin-.*\.vercel\.app$/
+            /^https:\/\/yeng-admin-.*\.vercel\.app$/,
+            'https://client-yeng.vercel.app',
+            'https://client-yeng-k3ih3ohwg-jerome-christophers-projects.vercel.app',
+            'https://client-yeng-28csgmd37-jerome-christophers-projects.vercel.app',
+            /^https:\/\/client-yeng-.*\.vercel\.app$/,
         ],
         credentials: true,
     });

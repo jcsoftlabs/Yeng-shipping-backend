@@ -8,10 +8,10 @@ export declare class CustomersController {
     create(createCustomerDto: CreateCustomerDto): Promise<{
         id: string;
         email: string;
-        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
+        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -24,10 +24,10 @@ export declare class CustomersController {
     findAll(search?: string): Promise<{
         id: string;
         email: string;
-        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
+        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -43,10 +43,10 @@ export declare class CustomersController {
     getProfile(req: any): Promise<{
         id: string;
         email: string;
-        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
+        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;
@@ -88,10 +88,10 @@ export declare class CustomersController {
     searchByCode(code: string): Promise<{
         id: string;
         email: string;
-        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
+        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         city: string | null;
@@ -100,10 +100,10 @@ export declare class CustomersController {
     findByCustomAddress(customAddress: string): Promise<{
         id: string;
         email: string;
-        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
+        customAddress: string;
         addressLine1: string | null;
         addressLine2: string | null;
         city: string | null;
@@ -121,10 +121,10 @@ export declare class CustomersController {
     findOne(id: string): Promise<{
         id: string;
         email: string;
-        customAddress: string;
         firstName: string;
         lastName: string;
         phone: string;
+        customAddress: string;
         fullUSAAddress: string | null;
         addressLine1: string | null;
         addressLine2: string | null;

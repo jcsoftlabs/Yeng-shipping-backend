@@ -102,12 +102,9 @@ let CustomersService = class CustomersService {
                 city: createCustomerDto.city,
             },
         });
-        try {
-            await this.emailService.sendWelcomeEmail(customer);
-        }
-        catch (error) {
+        this.emailService.sendWelcomeEmail(customer).catch(error => {
             console.error('Failed to send welcome email:', error);
-        }
+        });
         const { password, ...result } = customer;
         return result;
     }
