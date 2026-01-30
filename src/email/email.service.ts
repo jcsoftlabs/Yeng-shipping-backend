@@ -47,7 +47,7 @@ export class EmailService {
         // Default sender - SHOULD be verified domain in Resend
         // Ideally: 'Yeng Shipping <notifications@yengshipping.com>'
         // For testing/onboarding: 'onboarding@resend.dev' works if sending to your own email
-        this.fromEmail = process.env.EMAIL_FROM || 'Yeng Shipping <onboarding@resend.dev>';
+        this.fromEmail = process.env.EMAIL_FROM || 'Yeng Shipping <info@yengshipping.delivery>';
     }
 
     /**
