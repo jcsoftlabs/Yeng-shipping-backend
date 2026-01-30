@@ -96,7 +96,7 @@ export function getPasswordResetEmailTemplate(data: {
                 Expédition USA-Haiti Simplifiée
             </p>
             <p style="margin: 0; font-size: 13px; opacity: 0.7;">
-                📧 support@yengshipping.com
+                📧 support@yengshipping.delivery
             </p>
         </div>
     </div>

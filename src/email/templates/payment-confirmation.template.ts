@@ -54,7 +54,7 @@ export function getPaymentConfirmationEmailTemplate(data: {
                     </h2>
                     <div style="background: white; padding: 20px; border-radius: 8px;">
                         <p style="margin: 0; font-size: 36px; color: #198754; font-weight: bold;">
-                            ${data.paymentAmount.toFixed(2)} HTG
+                            ${data.paymentAmount.toFixed(2)} USD
                         </p>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ export function getPaymentConfirmationEmailTemplate(data: {
                 Expédition USA-Haiti Simplifiée
             </p>
             <p style="margin: 0; font-size: 13px; opacity: 0.7;">
-                📧 support@yengshipping.com
+                📧 support@yengshipping.delivery
             </p>
         </div>
     </div>

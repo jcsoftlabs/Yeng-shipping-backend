@@ -46,7 +46,7 @@ export function getInvoiceEmailTemplate(data: {
                             Montant total
                         </p>
                         <p style="margin: 0; font-size: 32px; color: #6610f2; font-weight: bold;">
-                            ${data.totalAmount.toFixed(2)} HTG
+                            ${data.totalAmount.toFixed(2)} USD
                         </p>
                     </div>
                 </div>
@@ -113,7 +113,7 @@ export function getInvoiceEmailTemplate(data: {
             <!-- Info Box -->
             <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 30px 0 0 0; border-left: 4px solid #ffc107;">
                 <p style="margin: 0; color: #856404; font-size: 14px; line-height: 1.6;">
-                    <strong>💡 Besoin d'aide ?</strong> Si vous avez des questions concernant cette facture, n'hésitez pas à nous contacter à support@yengshipping.com
+                    <strong>💡 Besoin d'aide ?</strong> Si vous avez des questions concernant cette facture, n'hésitez pas à nous contacter à support@yengshipping.delivery
                 </p>
             </div>
         </div>
@@ -130,7 +130,7 @@ export function getInvoiceEmailTemplate(data: {
                 📍 7829 NW 72nd Ave, Miami, FL 33166, USA
             </p>
             <p style="margin: 0; font-size: 13px; opacity: 0.7;">
-                📧 support@yengshipping.com
+                📧 support@yengshipping.delivery
             </p>
         </div>
     </div>

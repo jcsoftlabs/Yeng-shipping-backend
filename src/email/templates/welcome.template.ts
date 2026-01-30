@@ -207,7 +207,7 @@ ${data.fullUSAAddress}
                 📍 7829 NW 72nd Ave, Miami, FL 33166, USA
             </p>
             <p style="margin: 0; font-size: 14px; opacity: 0.8;">
-                📧 support@yengshipping.com
+                📧 support@yengshipping.delivery
             </p>
         </div>
     </div>
