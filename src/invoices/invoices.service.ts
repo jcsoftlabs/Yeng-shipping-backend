@@ -1,24 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import PDFDocument from 'pdfkit';
-import * as nodemailer from 'nodemailer';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class InvoicesService {
-    private transporter: nodemailer.Transporter;
-
-    constructor(private prisma: PrismaService) {
-        // Configure email transporter
-        this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.gmail.com',
-            port: parseInt(process.env.SMTP_PORT || '587'),
-            secure: false,
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
-            },
-        });
-    }
+    constructor(
+        private prisma: PrismaService,
+        private emailService: EmailService,
+    ) { }
 
     async findAll(filters?: { customerId?: string; status?: string; search?: string }) {
         const where: any = {};
@@ -50,6 +40,7 @@ export class InvoicesService {
                                 lastName: true,
                                 email: true,
                                 customAddress: true,
+                                fullUSAAddress: true,
                             },
                         },
                     },
@@ -174,28 +165,19 @@ export class InvoicesService {
         const invoice = await this.findOne(id);
         const pdfBuffer = await this.generatePDF(id);
 
-        const mailOptions = {
-            from: process.env.SMTP_FROM || 'noreply@yengshipping.com',
-            to: invoice.parcel.customer.email,
-            subject: `Facture ${invoice.invoiceNumber} - Yeng Shipping`,
-            html: `
-                <h2>Bonjour ${invoice.parcel.customer.firstName} ${invoice.parcel.customer.lastName},</h2>
-                <p>Veuillez trouver ci-joint votre facture pour le colis <strong>${invoice.parcel.trackingNumber}</strong>.</p>
-                <p><strong>Montant total:</strong> $${invoice.parcel.totalAmount.toFixed(2)}</p>
-                <p><strong>Statut:</strong> ${invoice.parcel.paymentStatus}</p>
-                <br>
-                <p>Merci de votre confiance!</p>
-                <p>L'équipe Yeng Shipping</p>
-            `,
-            attachments: [
-                {
-                    filename: `facture-${invoice.invoiceNumber}.pdf`,
-                    content: pdfBuffer,
-                },
-            ],
-        };
-
-        await this.transporter.sendMail(mailOptions);
+        await this.emailService.sendInvoiceEmail({
+            customer: {
+                ...invoice.parcel.customer,
+                customAddress: invoice.parcel.customer.customAddress || undefined,
+                fullUSAAddress: invoice.parcel.customer.fullUSAAddress || undefined,
+            },
+            invoiceNumber: invoice.invoiceNumber,
+            trackingNumber: invoice.parcel.trackingNumber,
+            invoiceDate: new Date(invoice.createdAt).toLocaleDateString('fr-FR'),
+            totalAmount: invoice.parcel.totalAmount,
+            parcelDescription: invoice.parcel.description,
+            pdfBuffer: pdfBuffer,
+        });
 
         return { message: 'Email envoyé avec succès' };
     }
