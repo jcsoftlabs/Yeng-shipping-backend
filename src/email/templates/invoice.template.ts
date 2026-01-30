@@ -20,7 +20,7 @@ export function getInvoiceEmailTemplate(data: {
     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #6610f2, #6f42c1); padding: 40px 20px; text-align: center;">
-            <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+            <img src="https://www.yengshipping.delivery/logo.png" alt="Yeng Shipping" style="width: 120px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));" />
             <h1 style="color: white; margin: 0; font-size: 28px; font-weight: bold;">
                 Votre Facture
             </h1>

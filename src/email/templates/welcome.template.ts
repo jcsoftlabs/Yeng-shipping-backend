@@ -19,6 +19,7 @@ export function getWelcomeEmailTemplate(data: {
     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #E63946, #F77F00); padding: 50px 20px; text-align: center;">
+            <img src="https://www.yengshipping.delivery/logo.png" alt="Yeng Shipping" style="width: 150px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));" />
             <h1 style="color: white; margin: 0 0 10px 0; font-size: 32px; font-weight: bold;">
                 🎉 Bienvenue chez Yeng Shipping !
             </h1>
