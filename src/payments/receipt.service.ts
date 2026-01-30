@@ -37,9 +37,11 @@ export class ReceiptService {
 
             // Logo (centered, grayscale for thermal printer)
             try {
-                const logoPath = require.resolve('../../assets/logo.png');
-                doc.image(logoPath, 52, doc.y, { width: 60, fit: [60, 60] });
-                doc.moveDown(4);
+                const logoPath = require('path').join(__dirname, '../assets/logo.png');
+                if (require('fs').existsSync(logoPath)) {
+                    doc.image(logoPath, 52, doc.y, { width: 60, fit: [60, 60] });
+                    doc.moveDown(4);
+                }
             } catch (e) {
                 // If logo not found, skip it
             }
