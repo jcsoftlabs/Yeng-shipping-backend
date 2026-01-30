@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import { getParcelCreatedEmailTemplate } from './templates/parcel-created.template';
 import { getParcelStatusUpdatedEmailTemplate } from './templates/parcel-status-updated.template';
 import { getWelcomeEmailTemplate } from './templates/welcome.template';
@@ -28,37 +28,26 @@ interface Parcel {
 
 @Injectable()
 export class EmailService {
-    private transporter: nodemailer.Transporter;
+    private resend: Resend;
     private readonly logger = new Logger(EmailService.name);
     private readonly frontendUrl: string;
+    private readonly fromEmail: string;
 
     constructor() {
         // Get frontend URL from environment or use default
         this.frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
 
-        // Configure email transporter with Gmail SMTP
-        this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.gmail.com',
-            port: parseInt(process.env.SMTP_PORT || '587'),
-            secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD,
-            },
-        });
-
-        // Verify transporter configuration
-        this.verifyConnection();
-    }
-
-    private async verifyConnection() {
-        try {
-            await this.transporter.verify();
-            this.logger.log('✅ Email service is ready to send emails');
-        } catch (error) {
-            this.logger.error('❌ Email service configuration error:', error);
-            this.logger.warn('Emails will not be sent until SMTP credentials are configured');
+        // Initialize Resend with API Key
+        const apiKey = process.env.RESEND_API_KEY;
+        if (!apiKey) {
+            this.logger.warn('⚠️ RESEND_API_KEY is not defined. Emails will not be sent.');
         }
+        this.resend = new Resend(apiKey);
+
+        // Default sender - SHOULD be verified domain in Resend
+        // Ideally: 'Yeng Shipping <notifications@yengshipping.com>'
+        // For testing/onboarding: 'onboarding@resend.dev' works if sending to your own email
+        this.fromEmail = process.env.EMAIL_FROM || 'Yeng Shipping <onboarding@resend.dev>';
     }
 
     /**
@@ -77,17 +66,16 @@ export class EmailService {
                 dashboardUrl,
             });
 
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to: customer.email,
                 subject,
                 html,
             });
 
-            this.logger.log(`✅ Welcome email sent to ${customer.email}`);
+            this.logger.log(`✅ Welcome email sent to ${customer.email} via Resend`);
         } catch (error) {
             this.logger.error(`❌ Failed to send welcome email to ${customer.email}:`, error);
-            // Don't throw - we don't want email failures to block registration
         }
     }
 
@@ -108,17 +96,16 @@ export class EmailService {
                 trackingUrl,
             });
 
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to: parcel.customer.email,
                 subject,
                 html,
             });
 
-            this.logger.log(`✅ Parcel created email sent to ${parcel.customer.email} for ${parcel.trackingNumber}`);
+            this.logger.log(`✅ Parcel created email sent to ${parcel.customer.email} via Resend`);
         } catch (error) {
             this.logger.error(`❌ Failed to send parcel created email for ${parcel.trackingNumber}:`, error);
-            // Don't throw - we don't want email failures to block parcel creation
         }
     }
 
@@ -143,22 +130,21 @@ export class EmailService {
                 trackingUrl,
             });
 
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to: parcel.customer.email,
                 subject,
                 html,
             });
 
             this.logger.log(
-                `✅ Status update email sent to ${parcel.customer.email} for ${parcel.trackingNumber} (${oldStatus} → ${newStatus})`,
+                `✅ Status update email sent to ${parcel.customer.email} for ${parcel.trackingNumber} (${oldStatus} → ${newStatus}) via Resend`,
             );
         } catch (error) {
             this.logger.error(
                 `❌ Failed to send status update email for ${parcel.trackingNumber}:`,
                 error,
             );
-            // Don't throw - we don't want email failures to block status updates
         }
     }
 
@@ -182,17 +168,17 @@ export class EmailService {
                 expiresIn,
             });
 
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to: customer.email,
                 subject,
                 html,
             });
 
-            this.logger.log(`✅ Password reset email sent to ${customer.email}`);
+            this.logger.log(`✅ Password reset email sent to ${customer.email} via Resend`);
         } catch (error) {
             this.logger.error(`❌ Failed to send password reset email to ${customer.email}:`, error);
-            throw error; // Throw here because password reset should fail if email fails
+            throw error;
         }
     }
 
@@ -223,22 +209,21 @@ export class EmailService {
                 dashboardUrl,
             });
 
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to: data.customer.email,
                 subject,
                 html,
             });
 
             this.logger.log(
-                `✅ Payment confirmation email sent to ${data.customer.email} for ${data.trackingNumber}`,
+                `✅ Payment confirmation email sent to ${data.customer.email} for ${data.trackingNumber} via Resend`,
             );
         } catch (error) {
             this.logger.error(
                 `❌ Failed to send payment confirmation email to ${data.customer.email}:`,
                 error,
             );
-            // Don't throw - payment is already processed
         }
     }
 
@@ -266,8 +251,8 @@ export class EmailService {
                 parcelDescription: data.parcelDescription,
             });
 
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to: data.customer.email,
                 subject,
                 html,
@@ -275,20 +260,18 @@ export class EmailService {
                     {
                         filename: `Facture_${data.invoiceNumber}.pdf`,
                         content: data.pdfBuffer,
-                        contentType: 'application/pdf',
                     },
                 ],
             });
 
             this.logger.log(
-                `✅ Invoice email sent to ${data.customer.email} for invoice ${data.invoiceNumber}`,
+                `✅ Invoice email sent to ${data.customer.email} for invoice ${data.invoiceNumber} via Resend`,
             );
         } catch (error) {
             this.logger.error(
                 `❌ Failed to send invoice email to ${data.customer.email}:`,
                 error,
             );
-            // Don't throw - invoice is already generated
         }
     }
 
@@ -297,15 +280,15 @@ export class EmailService {
      */
     async sendTestEmail(to: string): Promise<void> {
         try {
-            await this.transporter.sendMail({
-                from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+            await this.resend.emails.send({
+                from: this.fromEmail,
                 to,
-                subject: '✅ Yeng Shipping - Test Email',
+                subject: '✅ Yeng Shipping - Resend Test',
                 html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                        <h2 style="color: #E63946;">✅ Email Configuration Successful!</h2>
-                        <p>This is a test email from Yeng Shipping backend.</p>
-                        <p>If you received this, your email configuration is working correctly.</p>
+                        <h2 style="color: #E63946;">✅ Resend Integration Successful!</h2>
+                        <p>This is a test email from Yeng Shipping backend using Resend API.</p>
+                        <p>If you received this, your email configuration works via Resend.</p>
                         <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
                         <p style="color: #666; font-size: 12px;">
                             Yeng Shipping - Expédition USA-Haiti Simplifiée
@@ -314,7 +297,7 @@ export class EmailService {
                 `,
             });
 
-            this.logger.log(`✅ Test email sent successfully to ${to}`);
+            this.logger.log(`✅ Test email sent successfully to ${to} via Resend`);
         } catch (error) {
             this.logger.error(`❌ Failed to send test email to ${to}:`, error);
             throw error;
