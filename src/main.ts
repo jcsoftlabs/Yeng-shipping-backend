@@ -19,6 +19,10 @@ async function bootstrap() {
       'https://client-yeng-k3ih3ohwg-jerome-christophers-projects.vercel.app',
       'https://client-yeng-28csgmd37-jerome-christophers-projects.vercel.app',
       /^https:\/\/client-yeng-.*\.vercel\.app$/,  // All client preview deployments
+
+      // Production Domains
+      'https://www.yengshipping.delivery',
+      'https://yengshipping.delivery',
     ],
     credentials: true,
   });
