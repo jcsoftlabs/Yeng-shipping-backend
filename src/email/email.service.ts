@@ -34,8 +34,11 @@ export class EmailService {
     private readonly fromEmail: string;
 
     constructor() {
-        // Get frontend URL from environment or use default
-        this.frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
+        // Enforce official domain in production
+        const isProduction = process.env.NODE_ENV === 'production';
+        this.frontendUrl = isProduction
+            ? 'https://www.yengshipping.delivery'
+            : (process.env.FRONTEND_URL || 'http://localhost:3001');
 
         // Initialize Resend with API Key
         const apiKey = process.env.RESEND_API_KEY;
