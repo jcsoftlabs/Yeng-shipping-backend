@@ -300,10 +300,19 @@ export class ParcelsService {
             data: {
                 parcelId: id,
                 status: updateStatusDto.status,
-                location: updateStatusDto.location || parcel.currentLocation || 'Unknown',
+                location: updateStatusDto.location || this.getDefaultLocationForStatus(updateStatusDto.status, parcel.currentLocation || 'Unknown'),
                 description: updateStatusDto.description || this.getStatusDescription(updateStatusDto.status),
             },
         });
+
+        // Update the parcel location too if it changed
+        const newLocation = updateStatusDto.location || this.getDefaultLocationForStatus(updateStatusDto.status, parcel.currentLocation || 'Unknown');
+        if (newLocation !== parcel.currentLocation) {
+            await this.prisma.parcel.update({
+                where: { id },
+                data: { currentLocation: newLocation }
+            });
+        }
 
         // 🆕 Send email notification if status changed
         if (oldStatus !== updateStatusDto.status) {
@@ -320,6 +329,21 @@ export class ParcelsService {
         }
 
         return updatedParcel;
+    }
+
+    private getDefaultLocationForStatus(status: ParcelStatus, currentLocation: string = 'Unknown'): string {
+        switch (status) {
+            case ParcelStatus.IN_TRANSIT_HAITI:
+                return 'En route vers Haïti';
+            case ParcelStatus.ARRIVED_HAITI:
+                return 'Port-au-Prince, Haïti';
+            case ParcelStatus.DEPARTED_USA:
+                return 'Miami, FL (Départ)';
+            case ParcelStatus.PICKED_UP:
+                return 'Livré au client';
+            default:
+                return currentLocation;
+        }
     }
 
     private getStatusDescription(status: ParcelStatus): string {
