@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Query, UseGuards, Req, UnauthorizedException, Inject, forwardRef } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, UseGuards, Req, UnauthorizedException, Inject, forwardRef, Delete } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { AuthService } from '../auth/auth.service';
@@ -56,5 +56,10 @@ export class CustomersController {
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.customersService.findOne(id);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.customersService.remove(id);
     }
 }

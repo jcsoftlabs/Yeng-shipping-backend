@@ -255,4 +255,45 @@ export class CustomersService {
 
         return customers;
     }
+
+    async remove(id: string) {
+        // Use transaction to ensure all related data is deleted
+        return this.prisma.$transaction(async (prisma) => {
+            // 1. Find all parcels for this customer
+            const parcels = await prisma.parcel.findMany({
+                where: { customerId: id },
+                select: { id: true },
+            });
+
+            const parcelIds = parcels.map(p => p.id);
+
+            if (parcelIds.length > 0) {
+                // 2. Delete related data for these parcels
+                // Delete tracking events
+                await prisma.trackingEvent.deleteMany({
+                    where: { parcelId: { in: parcelIds } },
+                });
+
+                // Delete invoices
+                await prisma.invoice.deleteMany({
+                    where: { parcelId: { in: parcelIds } },
+                });
+
+                // Delete payments
+                await prisma.payment.deleteMany({
+                    where: { parcelId: { in: parcelIds } },
+                });
+
+                // 3. Delete parcels
+                await prisma.parcel.deleteMany({
+                    where: { id: { in: parcelIds } },
+                });
+            }
+
+            // 4. Delete the customer
+            return prisma.customer.delete({
+                where: { id },
+            });
+        });
+    }
 }
