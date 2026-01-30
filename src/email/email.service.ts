@@ -12,8 +12,8 @@ interface Customer {
     email: string;
     firstName: string;
     lastName: string;
-    customAddress?: string;
-    fullUSAAddress?: string;
+    customAddress?: string | null;
+    fullUSAAddress?: string | null;
 }
 
 interface Parcel {
