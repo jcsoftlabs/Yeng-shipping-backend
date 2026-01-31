@@ -3,9 +3,14 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { ParcelStatus, PaymentStatus } from '@prisma/client';
 
+import { EmailService } from '../email/email.service';
+
 @Injectable()
 export class PaymentsService {
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private prisma: PrismaService,
+        private emailService: EmailService,
+    ) { }
 
     async create(createPaymentDto: CreatePaymentDto) {
         // Get parcel details
@@ -13,6 +18,7 @@ export class PaymentsService {
             where: { id: createPaymentDto.parcelId },
             include: {
                 payments: true,
+                customer: true,
             },
         });
 
