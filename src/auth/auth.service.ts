@@ -123,8 +123,18 @@ export class AuthService {
             },
         });
 
-        // Send email
-        await this.emailService.sendPasswordResetEmail(customer, resetToken);
+        // Normalize nullable Prisma fields before passing them to the email layer.
+        await this.emailService.sendPasswordResetEmail(
+            {
+                id: customer.id,
+                email: customer.email,
+                firstName: customer.firstName,
+                lastName: customer.lastName,
+                customAddress: customer.customAddress ?? undefined,
+                fullUSAAddress: customer.fullUSAAddress ?? undefined,
+            },
+            resetToken,
+        );
 
         return { message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' };
     }
