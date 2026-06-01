@@ -54,6 +54,10 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
     return this.prisma.payment;
   }
 
+  get packageForm() {
+    return this.prisma.packageForm;
+  }
+
   get settings() {
     return this.prisma.settings;
   }

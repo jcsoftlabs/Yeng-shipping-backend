@@ -9,6 +9,7 @@ import { ParcelsModule } from './parcels/parcels.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ReportsModule } from './reports/reports.module';
 import { InvoicesModule } from './invoices/invoices.module';
+import { PackageFormsModule } from './package-forms/package-forms.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { InvoicesModule } from './invoices/invoices.module';
     PaymentsModule,
     ReportsModule,
     InvoicesModule,
+    PackageFormsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

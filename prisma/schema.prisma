@@ -40,6 +40,11 @@ enum PaymentMethod {
   BANK_TRANSFER
 }
 
+enum PackageFormSource {
+  PUBLIC
+  CUSTOMER_PORTAL
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -74,8 +79,32 @@ model Customer {
   updatedAt       DateTime  @updatedAt
   
   parcels         Parcel[]
+  packageForms    PackageForm[]
   
   @@map("customers")
+}
+
+model PackageForm {
+  id                 String            @id @default(uuid())
+  customerId         String?
+  customer           Customer?         @relation(fields: [customerId], references: [id])
+  fullName           String
+  email              String
+  address            String
+  city               String
+  country            String           @default("Haiti")
+  packageCount       Int              @default(1)
+  trackingNumbers    Json
+  packageDescription String?
+  notes              String?
+  signatureDataUrl   String
+  source             PackageFormSource @default(PUBLIC)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@map("package_forms")
+  @@index([email])
+  @@index([createdAt])
 }
 
 model Parcel {
